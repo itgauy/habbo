@@ -1,10 +1,31 @@
 import { useState, useRef, useEffect } from 'react'
 
 const MusicPlayer = ({ playlist }) => {
-  const [currentTrack, setCurrentTrack] = useState(0)
+  // Get initial track from URL params
+  const getInitialTrack = () => {
+    const urlParams = new URLSearchParams(window.location.search)
+    const trackParam = urlParams.get('track')
+    if (trackParam) {
+      const trackIndex = parseInt(trackParam) - 1 // Convert to 0-based index
+      if (trackIndex >= 0 && trackIndex < playlist.length) {
+        return trackIndex
+      }
+    }
+    return 0
+  }
+
+  const [currentTrack, setCurrentTrack] = useState(getInitialTrack())
   const [isPlaying, setIsPlaying] = useState(false)
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false)
   const videoRef = useRef(null)
   const audioRef = useRef(null)
+
+  // Update URL when track changes
+  useEffect(() => {
+    const newUrl = new URL(window.location)
+    newUrl.searchParams.set('track', (currentTrack + 1).toString())
+    window.history.replaceState({}, '', newUrl)
+  }, [currentTrack])
 
   useEffect(() => {
     const audio = audioRef.current
@@ -34,6 +55,15 @@ const MusicPlayer = ({ playlist }) => {
       }
     }
   }, [currentTrack, playlist.length])
+
+  // Reset video loaded state when track changes
+  useEffect(() => {
+    setIsVideoLoaded(false)
+  }, [currentTrack])
+
+  const handleVideoLoad = () => {
+    setIsVideoLoaded(true)
+  }
 
   const togglePlay = async () => {
     if (videoRef.current && audioRef.current) {
@@ -90,28 +120,32 @@ const MusicPlayer = ({ playlist }) => {
       primaryHover: 'hover:text-blue-300',
       button: 'bg-blue-500',
       buttonHover: 'hover:bg-blue-600',
-      accent: 'text-blue-400'
+      accent: 'text-blue-400',
+      loading: 'border-t-blue-600'
     },
     purple: {
       primary: 'text-purple-400',
       primaryHover: 'hover:text-purple-300',
       button: 'bg-purple-500',
       buttonHover: 'hover:bg-purple-600',
-      accent: 'text-purple-400'
+      accent: 'text-purple-400',
+      loading: 'border-t-purple-600'
     },
     pink: {
       primary: 'text-pink-400',
       primaryHover: 'hover:text-pink-300',
       button: 'bg-pink-500',
       buttonHover: 'hover:bg-pink-600',
-      accent: 'text-pink-400'
+      accent: 'text-pink-400',
+      loading: 'border-t-pink-600'
     },
     green: {
       primary: 'text-green-400',
       primaryHover: 'hover:text-green-300',
       button: 'bg-green-500',
       buttonHover: 'hover:bg-green-600',
-      accent: 'text-green-400'
+      accent: 'text-green-400',
+      loading: 'border-t-green-600'
     }
   }
 
@@ -122,17 +156,34 @@ const MusicPlayer = ({ playlist }) => {
 
   return (
     <div className="bg-black flex flex-col items-center justify-center min-h-screen w-full">
-      <video
-        ref={videoRef}
-        src={currentItem.video}
-        loop
-        muted
-        playsInline
-        controls={false}
-        autoPlay
-        onContextMenu={(e) => e.preventDefault()}
-        className={currentItem.videoClass || "w-[90%] md:w-[50%]"}
-      />
+      {/* Fixed Video Container */}
+      <div className="relative mb-8 w-[90%] md:w-[60%] h-[400px] md:h-[500px] rounded-lg overflow-hidden flex items-center justify-center">
+        {/* Loading Skeleton */}
+        {!isVideoLoaded && (
+          <div className="absolute inset-0 bg-gray-800 rounded-lg animate-pulse flex items-center justify-center">
+            <div className="flex flex-col items-center justify-center">
+              <div className={`w-16 h-16 border-4 border-gray-600 ${primaryColors.loading} rounded-full animate-spin mb-4`}></div>
+              <p className="text-gray-400 text-sm">Loading video...</p>
+            </div>
+          </div>
+        )}
+
+        {/* Video Element */}
+        <video
+          ref={videoRef}
+          src={currentItem.video}
+          loop
+          muted
+          playsInline
+          controls={false}
+          autoPlay
+          onContextMenu={(e) => e.preventDefault()}
+          onLoadedData={handleVideoLoad}
+          onCanPlay={handleVideoLoad}
+          className={`max-w-full max-h-full object-contain transition-opacity duration-300 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
+        />
+      </div>
 
       <audio
         ref={audioRef}

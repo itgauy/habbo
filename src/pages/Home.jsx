@@ -23,7 +23,6 @@ const Home = () => {
       link: "https://www.habboon.pw",
       video: Sunset,
       audio: BOAF,
-      videoClass: "w-[90%] md:w-[30%]",
       uiColor: {
         primary: "purple",
         accent: "pink"
