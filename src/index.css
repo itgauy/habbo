@@ -2,4 +2,5 @@
 
 body {
   @apply font-sans;
+  @apply bg-black;
 }
