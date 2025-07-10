@@ -160,7 +160,7 @@ const MusicPlayer = ({ playlist }) => {
       <div className="relative mb-8 w-[90%] md:w-[60%] h-[400px] md:h-[500px] rounded-lg overflow-hidden flex items-center justify-center">
         {/* Loading Skeleton */}
         {!isVideoLoaded && (
-          <div className="absolute inset-0 bg-gray-800 rounded-lg animate-pulse flex items-center justify-center">
+          <div className={`absolute inset-0 rounded-lg animate-pulse flex items-center justify-center`}>
             <div className="flex flex-col items-center justify-center">
               <div className={`w-16 h-16 border-4 border-gray-600 ${primaryColors.loading} rounded-full animate-spin mb-4`}></div>
               <p className="text-gray-400 text-sm">Loading video...</p>
