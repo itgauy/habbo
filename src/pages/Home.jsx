@@ -10,7 +10,11 @@ const Home = () => {
       roomBy: "sudo",
       link: "https://habba.io",
       video: Seaside,
-      audio: Blue
+      audio: Blue,
+      uiColor: {
+        primary: "blue",
+        accent: "blue"
+      }
     },
     {
       title: "'Birds of A Feather' by Billie Eilish",
@@ -19,7 +23,11 @@ const Home = () => {
       link: "https://www.habboon.pw",
       video: Sunset,
       audio: BOAF,
-      videoClass: "w-[90%] md:w-[30%]"
+      videoClass: "w-[90%] md:w-[30%]",
+      uiColor: {
+        primary: "purple",
+        accent: "pink"
+      }
     }
   ]
 

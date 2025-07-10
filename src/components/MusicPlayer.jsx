@@ -83,7 +83,42 @@ const MusicPlayer = ({ playlist }) => {
     }, 100)
   }
 
+  // Color mapping for UI elements
+  const colorMap = {
+    blue: {
+      primary: 'text-blue-400',
+      primaryHover: 'hover:text-blue-300',
+      button: 'bg-blue-500',
+      buttonHover: 'hover:bg-blue-600',
+      accent: 'text-blue-400'
+    },
+    purple: {
+      primary: 'text-purple-400',
+      primaryHover: 'hover:text-purple-300',
+      button: 'bg-purple-500',
+      buttonHover: 'hover:bg-purple-600',
+      accent: 'text-purple-400'
+    },
+    pink: {
+      primary: 'text-pink-400',
+      primaryHover: 'hover:text-pink-300',
+      button: 'bg-pink-500',
+      buttonHover: 'hover:bg-pink-600',
+      accent: 'text-pink-400'
+    },
+    green: {
+      primary: 'text-green-400',
+      primaryHover: 'hover:text-green-300',
+      button: 'bg-green-500',
+      buttonHover: 'hover:bg-green-600',
+      accent: 'text-green-400'
+    }
+  }
+
   const currentItem = playlist[currentTrack]
+  const uiColors = currentItem.uiColor || { primary: "blue", accent: "blue" }
+  const primaryColors = colorMap[uiColors.primary] || colorMap.blue
+  const accentColors = colorMap[uiColors.accent] || colorMap.blue
 
   return (
     <div className="bg-black flex flex-col items-center justify-center min-h-screen w-full">
@@ -110,10 +145,10 @@ const MusicPlayer = ({ playlist }) => {
         {/* Song Info */}
         <div className="text-center mb-4">
           <h1 className="text-white text-xl font-bold mb-1">Now Playing</h1>
-          <p className="text-blue-400 text-lg font-semibold">{currentItem.title}</p>
+          <p className={`${primaryColors.primary} text-lg font-semibold`}>{currentItem.title}</p>
           <p className="text-gray-400 text-sm">At {currentItem.location}</p>
-          <p className="text-gray-300 text-sm">Room by: <span className="text-blue-400 font-medium">{currentItem.roomBy}</span></p>
-          <a href={currentItem.link} className="text-blue-400 hover:text-blue-300 text-sm underline transition-colors">{currentItem.link}</a>
+          <p className="text-gray-300 text-sm">Room by: <span className={`${accentColors.accent} font-medium`}>{currentItem.roomBy}</span></p>
+          <a href={currentItem.link} className={`${primaryColors.primary} ${primaryColors.primaryHover} text-sm underline transition-colors`}>{currentItem.link}</a>
         </div>
 
         {/* Controls */}
@@ -129,7 +164,7 @@ const MusicPlayer = ({ playlist }) => {
 
           <button
             onClick={togglePlay}
-            className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-4 transition-colors shadow-lg"
+            className={`${primaryColors.button} ${primaryColors.buttonHover} text-white rounded-full p-4 transition-colors shadow-lg`}
           >
             {isPlaying ? (
               <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
