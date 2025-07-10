@@ -52,6 +52,8 @@ const Home = () => {
           <h1 className="text-white text-xl font-bold mb-1">Now Playing</h1>
           <p className="text-blue-400 text-lg font-semibold">Blue by Yung Kai</p>
           <p className="text-gray-400 text-sm">At Seaside Tambayan</p>
+          <p className="text-gray-300 text-sm">Room by: <span className="text-blue-400 font-medium">sudo</span></p>
+          <a href="https://habba.io" className="text-blue-400 hover:text-blue-300 text-sm underline transition-colors">https://habba.io</a>
         </div>
 
         {/* Control */}
