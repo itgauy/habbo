@@ -7,7 +7,7 @@ const Home = () => {
     {
       title: "'Blue' by Yung Kai",
       location: "Seaside Tambayan",
-      roomBy: "sudo",
+      roomBy: "sudo (me)",
       link: "https://habba.io",
       video: Seaside,
       audio: Blue,
@@ -19,7 +19,7 @@ const Home = () => {
     {
       title: "'Birds of A Feather' by Billie Eilish",
       location: "Sunset Vibes",
-      roomBy: "coqueto",
+      roomBy: "coqueto (me)",
       link: "https://www.habboon.pw",
       video: Sunset,
       audio: BOAF,
