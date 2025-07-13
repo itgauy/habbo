@@ -1,6 +1,6 @@
 import MusicPlayer from '../components/MusicPlayer'
-import { Seaside, Sunset } from './videos'
-import { Blue, BOAF } from './audios'
+import { Seaside, Sunset, etivac } from './videos'
+import { Blue, BOAF, yoasobi } from './audios'
 
 const Home = () => {
   const playlist = [
@@ -26,6 +26,18 @@ const Home = () => {
       uiColor: {
         primary: "purple",
         accent: "pink"
+      }
+    },
+    {
+      title: "'Racing Into The Night' by YOASOBI",
+      location: "Etivac Canals",
+      roomBy: "Warriuz",
+      link: "https://www.habbo.com",
+      video: etivac,
+      audio: yoasobi,
+      uiColor: {
+        primary: "brown",
+        accent: "brown"
       }
     }
   ]
