@@ -146,6 +146,14 @@ const MusicPlayer = ({ playlist }) => {
       buttonHover: 'hover:bg-green-600',
       accent: 'text-green-400',
       loading: 'border-t-green-600'
+    },
+    brown: {
+      primary: 'text-red-800',
+      primaryHover: 'hover:text-brown-300',
+      button: 'bg-red-800',
+      buttonHover: 'hover:bg-brown-600',
+      accent: 'text-teal-300',
+      loading: 'border-t-brown-600'
     }
   }
 
